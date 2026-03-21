@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-#set and draw a bar plot
+#set and draw the bar plot
 gene_expression =  (genes['TP53'],genes['EGFR'],genes['BRCA1'],genes['PTEN'],genes['ESR1'],genes['MYC'])
 x_num = np.arange(6) 
 width = 0.35
