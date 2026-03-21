@@ -1,1 +1,0 @@
-I'm sorry that my Practical_3 folder doesnot contain all of the assignments in week3 practical class, because I have save them in another folder. Unfortunately, I carelessly delete them from my computer. Thus, I have to re-finish the assignments, and they are not finished yet. Pleases check this folder days later.... Thanks very much!
