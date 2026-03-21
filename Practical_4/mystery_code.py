@@ -1,6 +1,7 @@
 # What does this piece of code do?
 # Answer: create 11 random numbers and plus them together, then print the sum
 
+
 # Import libraries
 # randint allows drawing a random number,
 # e.g. randint(1,5) draws a number between 1 and 5

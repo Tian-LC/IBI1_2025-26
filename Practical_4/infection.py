@@ -8,6 +8,7 @@
 #    infectors = new infectors + infectors one day ago
 #print(days)
 
+
 infect_rate = float(input("Please enter the infect_rate:"))
 total_infector = int(input("Please enter the initial infectors number:"))
 count = 0

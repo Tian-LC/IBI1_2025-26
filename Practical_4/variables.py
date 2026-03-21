@@ -12,6 +12,7 @@ else:
     else:
         print("the change between 2004 and 2015 is larger, and the population growth decelerates")
 #
+
 #4.2 task
 print("\n")
 X = True
