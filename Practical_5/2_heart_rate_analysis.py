@@ -7,6 +7,7 @@ for i in heart_rates_list:
 average = sum/float(num)
 print(' total number of patients is', num,'\n','the mean value of their heart rate is', average)
 
+
 #the number of each category and which category is the largest
 low = []
 normal = []

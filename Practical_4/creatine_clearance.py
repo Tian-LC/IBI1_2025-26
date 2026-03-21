@@ -15,7 +15,6 @@
 #     if gender neither "male" nor "female":
 #         print("variable "gender" needs corrected")
 
-
 age = float(input("Please input age:"))
 weight = float(input("Please input weight:"))
 Cr = float(input("Please input creatinine concentration:"))

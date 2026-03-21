@@ -4,7 +4,6 @@ genes['MYC'] = 11.6
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 #set and draw the bar plot
 gene_expression =  (genes['TP53'],genes['EGFR'],genes['BRCA1'],genes['PTEN'],genes['ESR1'],genes['MYC'])
 x_num = np.arange(6) 
