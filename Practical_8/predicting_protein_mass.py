@@ -7,11 +7,23 @@ def PPM (t):
         else:
             return -1
     return round(mass,2)
-target = input()
+
+###calling example 
+target = "GGGFAA"
+print("the example sequence is GGGFAA")
 if PPM(target) == -1:
     print("ERROR: at least one aminos are not be defiend")
 else:
-    print(PPM(target))
-##calling example
+    print("the prediction mass of example sequence is", PPM(target),"\n")
 #input: GGGFAA(any protein sequence)
 #output: predicted mass of the protein sequence
+
+
+target = input('Please input the target protein sequence:')
+if PPM(target) == -1:
+    print("ERROR: at least one aminos are not be defiend")
+else:
+    print('prediction mass of the sequence is:',PPM(target))
+
+
+
