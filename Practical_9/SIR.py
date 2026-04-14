@@ -47,5 +47,5 @@ plt.xlabel("time")
 plt.ylabel("number of people")
 plt.title("SIR model")
 plt.legend()
-
+plt.savefig("SIR.png")
 plt.show()
