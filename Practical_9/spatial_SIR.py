@@ -4,21 +4,22 @@ import matplotlib.pyplot as plt
 beta = 0.3
 gamma = 0.05
 population = np.zeros((100, 100), dtype=int)
-x_vacc = np.random.choice(range(100), 1000)
-y_vacc = np.random.choice(range(100), 1000)
+### TRY: considering vaccination ###
+# x_vacc = np.random.choice(range(100), 1000)
+# y_vacc = np.random.choice(range(100), 1000)
 
-for j in range(1000):
-    population[x_vacc[j], y_vacc[j]] = 2
+#for j in range(1000):
+#    population[x_vacc[j], y_vacc[j]] = 2
+#
+#while True:
+#    outbreak = np.random.choice(range(100), 2)
+#    if population[outbreak[0], outbreak[1]] == 0:
+#        population[outbreak[0], outbreak[1]] = 1
+#        break
 
-while True:
-    outbreak = np.random.choice(range(100), 2)
-    if population[outbreak[0], outbreak[1]] == 0:
-        population[outbreak[0], outbreak[1]] = 1
-        break
-
-for t in range(101):
+for t in range(101): #100 time loops
     
-    # recovery 先复制一份
+    # copy, to make the recovery and infection process happen at the same time
     new_population = population.copy()
 
     #  infection snippet
@@ -29,17 +30,18 @@ for t in range(101):
 
         for xNeighbour in range(x - 1, x + 2):
             for yNeighbour in range(y - 1, y + 2):
+                # infect each neighbour with probability beta
                 if (xNeighbour, yNeighbour) != (x, y):
-                    if xNeighbour != -1 and yNeighbour != -1 and xNeighbour!=100 and yNeighbour!=100:
-                        if population[xNeighbour, yNeighbour] == 0:
+                    if xNeighbour != -1 and yNeighbour != -1 and xNeighbour!=100 and yNeighbour!=100: # make sure I don't fall off an edge
+                        if population[xNeighbour, yNeighbour] == 0:  # only infect neighbours that are not already infected!
                             new_population[xNeighbour,yNeighbour]=np.random.choice(range(2),1,p=[1-beta,beta])[0]
 
         # recovery
         if population[x,y] == 1:
             new_population[x,y]=np.random.choice([1,2],1,p=[1-gamma,gamma])[0]
-        #update the population
+        #update the population (to make the recovery process and infection process at the same time)
         population = new_population
-    # 画图
+    # plot
     if t in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
         plt.figure(figsize=(6, 4), dpi=150)
         plt.imshow(population, cmap='viridis', interpolation='nearest')
