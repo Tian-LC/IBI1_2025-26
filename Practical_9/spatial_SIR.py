@@ -4,18 +4,18 @@ import matplotlib.pyplot as plt
 beta = 0.3
 gamma = 0.05
 population = np.zeros((100, 100), dtype=int)
-### TRY: considering vaccination ###
-# x_vacc = np.random.choice(range(100), 1000)
-# y_vacc = np.random.choice(range(100), 1000)
+ ### TRY: considering vaccination ###
+ #x_vacc = np.random.choice(range(100), 1000)
+ #y_vacc = np.random.choice(range(100), 1000)
 
-#for j in range(1000):
-#    population[x_vacc[j], y_vacc[j]] = 2
-#
-#while True:
-#    outbreak = np.random.choice(range(100), 2)
-#    if population[outbreak[0], outbreak[1]] == 0:
-#        population[outbreak[0], outbreak[1]] = 1
-#        break
+ #for j in range(1000):
+ #    population[x_vacc[j], y_vacc[j]] = 2
+ #
+ #while True:
+ #    outbreak = np.random.choice(range(100), 2)
+ #    if population[outbreak[0], outbreak[1]] == 0:
+ #        population[outbreak[0], outbreak[1]] = 1
+ #        break
 
 for t in range(101): #100 time loops
     
