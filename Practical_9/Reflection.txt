@@ -1,0 +1,4 @@
+The practical of this class is interesting
+It reminds me that things we learn in IBI1 is closely related to our daily lifes
+It is a little hard, but it's fine overall
+I learn how to build a probability model with 'np.random.choice'
