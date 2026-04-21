@@ -1,0 +1,12 @@
+Question:
+What was the distribution of DALYs across countries with the top 20 DALYs in 2019?
+
+Code starts at line:
+from line 79 to line 92 (Task5)
+
+Discussion:
+The bar chart shows the distribution of DALYs across the 20 countries with the highest DALYs in 2019. 
+The DALYs values are not evenly distributed, because some countries have much higher values than others. 
+This suggests that the burden of disease was much greater in certain countries than in the rest of the top 20. 
+This result is reasonable because countries differ in population size, age structure, health conditions, and access to healthcare. 
+In general, countries with larger populations or greater public health challenges may record higher DALYs.
