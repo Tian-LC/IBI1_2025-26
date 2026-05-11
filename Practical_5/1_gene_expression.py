@@ -1,6 +1,7 @@
 #create a dictionary
 genes = {'TP53': 12.4, 'EGFR': 15.1, 'BRCA1': 8.2, 'PTEN': 5.3, 'ESR1': 10.7}
 genes['MYC'] = 11.6 
+print(genes)
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -9,9 +10,9 @@ gene_expression =  (genes['TP53'],genes['EGFR'],genes['BRCA1'],genes['PTEN'],gen
 x_num = np.arange(6) 
 width = 0.35
 bar_plot = plt.bar(x_num, gene_expression, width)
-plt.xlabel ('gene_types')
-plt.ylabel ('gene_expression')
-plt.title ('gene_expression_level')
+plt.xlabel ('gene types')
+plt.ylabel ('gene expression')
+plt.title ('gene expression level')
 plt.xticks(x_num, ('TP53','EGFR','BRCA1','PTEN','ESR1','MYC1'))
 plt.yticks(np.arange(0, 16 ,1))
 plt.show()
