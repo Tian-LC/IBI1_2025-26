@@ -5,7 +5,7 @@ def PPM (t):
         if i in amino:
             mass += amino[i]
         else:
-            return "ERROR: at least one aminos are not be defiend"  ## it(-1) means an error
+            return "ERROR: at least one aminos are not be defined"  ## it(-1) means an error
     return round(mass,2)
 
 ###calling example###
