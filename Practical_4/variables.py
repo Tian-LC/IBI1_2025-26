@@ -11,7 +11,7 @@ else:
         print("the change between 2014 and 2025 is same as the change between 2004 and 2015, and the population growth neither accelerates nor decelerates")
     else:
         print("the change between 2004 and 2015 is larger, and the population growth decelerates")
-#
+#the change between 2004 and 2015 is larger, and the population growth decelerates
 #4.2 task
 print("\n")
 X = True
