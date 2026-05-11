@@ -46,6 +46,11 @@ for i in dalys_data["Entity"]:
         Bool_list.append(False)
 Zimbabwe = dalys_data.loc[Bool_list,:]
 print(Zimbabwe)
+Zimbabwe_first_year = Zimbabwe["Year"].min()
+Zimbabwe_last_year = Zimbabwe["Year"].max()
+print("Zimbabwe first recorded year:", Zimbabwe_first_year)
+print("Zimbabwe last recorded year:", Zimbabwe_last_year)
+# Zimbabwe DALYs data were recorded from 1990 to 2019.
 #This task can also be done like this: print(dalys_data.loc[dalys_data["Entity"] == "Zimbabwe"]) or we can delete ".loc" in this command
 
 #Task4: compute the countries with the maximum and mimumum DALYs in 2019
@@ -75,6 +80,8 @@ plt.xlabel("Years")
 plt.ylabel("DALYs")
 plt.savefig("C:/Users/ASUS/Desktop/Bioinformatic_workspace/IBI1/IBI1_2025-26/Practical_10/The_DALYs_change_with_years_of_Singapore.png")
 plt.show()
+# In 2019, the country with the maximum DALYs was Lesotho.
+# In 2019, the country with the minimum DALYs was Singapore.
 
 #Task5: Free Question: What was the distribution of DALYs across countries with top 20 DALYs  in 2019?
 print("Task5:")
