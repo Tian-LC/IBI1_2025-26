@@ -1,32 +1,51 @@
 import re
-f = open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r")
-count = -1
+
 seq = []
 header = []
-orfs = []
-for line in f:
-    line = line.strip()
-    if line.startswith('>'):
-        count += 1
-        header.append(line.split(" ")[0])
-        seq.append("")
-    else:
-        seq[count] += line.strip()
 
-end_codon = [None] * (count+1)
-for i in range(count+1):
-     m = re.search(r'^(ATG(?:...)*?)(TAA|TAG|TGA)', seq[i])
-     header[i] = header[i] + (";" + m.group(2) if m else "000")
-     end_codon[i] = m.group(1) + m.group(2) if m else "000"
+with open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r") as f:
+    count = -1
+
+    for line in f:
+        line = line.strip()
+
+        if line.startswith(">"):
+            count += 1
+            header.append(line)
+            seq.append("")
+        else:
+            seq[count] += line
 
 
-for i in range(count, -1, -1):
-    if "000" in header[i]:
-        del header[i]
-        del end_codon[i]
-        del seq[i]
 with open("stop_genes.fa", "w") as out:
     for i in range(len(header)):
-        out.write(header[i] + "\n")
-        out.write(seq[i] + "\n")
-    
+        current_seq = seq[i]
+
+        # Store all stop codons found in this gene
+        found_stops = []
+
+        # Check every possible ATG start codon
+        for start in range(len(current_seq) - 2):
+            if current_seq[start:start + 3] == "ATG":
+
+                # From this ATG, check codons in steps of 3
+                for pos in range(start + 3, len(current_seq) - 2, 3):
+                    codon = current_seq[pos:pos + 3]
+
+                    if codon in ["TAA", "TAG", "TGA"]:
+                        if codon not in found_stops:
+                            found_stops.append(codon)
+
+        # Only output genes that contain at least one in-frame stop codon
+        if len(found_stops) > 0:
+
+            # Extract the gene name from the header
+            gene_match = re.search(r"gene:([^\s]+)", header[i])
+
+            if gene_match:
+                gene_name = gene_match.group(1)
+            else:
+                gene_name = header[i].split()[0].replace(">", "")
+
+            out.write(">" + gene_name + ";" + ",".join(found_stops) + "\n")
+            out.write(current_seq + "\n")
