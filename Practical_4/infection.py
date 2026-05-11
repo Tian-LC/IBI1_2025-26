@@ -8,12 +8,12 @@
 #    infectors = new infectors + infectors one day ago
 #print(days)
 
-infect_rate = float(input("Please enter the infect_rate:"))
+infection_rate = float(input("Please enter the infect_rate:"))
 total_infector = int(input("Please enter the initial infectors number:"))
 count = 0
 while total_infector < 91:  
     count+=1 
-    new_infectors = total_infector * infect_rate
+    new_infectors = total_infector * infection_rate
     total_infector = new_infectors + total_infector
     if total_infector >=91:
         total_infector = 91 #if total_infector number is more than the students' number of the whole class, let it equals 91(the students' number of the shole class)
