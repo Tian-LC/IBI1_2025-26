@@ -1,4 +1,4 @@
-Hello, my name is Tian Linchuan.
+Hello, my name is Linchuan Tian.
 I like drinking tea and eating ice cream.
 I am enjoying studying IBI1 
 I am happy that I can push my repo from Visual Studio Code to GitHub
