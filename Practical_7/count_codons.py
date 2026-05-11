@@ -1,86 +1,89 @@
-import re
 import matplotlib.pyplot as plt
-f = open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r")
-count = -1
-seq = []
-header = []
-orfs = []
-for line in f:
-    line = line.strip()
-    if line.startswith('>'):
-        count += 1
-        header.append(line.split(" ")[0])
-        seq.append("")
-    else:
-        seq[count] += line.strip()
 
-end_codon = [None] * (count+1)
-for i in range(count+1):
-     m = re.search(r'^(ATG(?:...)*)(TAA|TAG|TGA)', seq[i])
-     header[i] = header[i] + (";" + m.group(2) if m else "000")
-     end_codon[i] = m.group(1) + m.group(2) if m else "000"
+seqs = []
+headers = []
 
+# Read the FASTA file and combine sequence lines for each gene
+with open("Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa", "r") as f:
+    count = -1
 
-for i in range(count, -1, -1):
-    if "000" in header[i]:
-        del header[i]
-        del end_codon[i]
+    for line in f:
+        line = line.strip()
 
-TAA = []
-TAG = []
-TGA = []
-codon_counts = {}
-codon_list = []
-
-for i in end_codon:
-    if re.search('TAA$', i):
-        TAA.append(i)
-    else:
-        if re.search('TAG$', i):
-            TAG.append(i)
+        if line.startswith(">"):
+            count += 1
+            headers.append(line)
+            seqs.append("")
         else:
-            TGA.append(i)
+            seqs[count] += line
 
-target = input() 
-if target == 'TAA':
-    for gene in TAA:
-        for i in range(0,len(gene)-3,3):
-            codon = gene[i:i+3]
-            if codon not in codon_list:
-                codon_list.append(codon)
+# Ask the user to input one stop codon
+target = input("Enter a stop codon (TAA, TAG, TGA): ")
+
+# Check that the input is valid
+if target not in ["TAA", "TAG", "TGA"]:
+    print("Invalid stop codon. Please enter TAA, TAG, or TGA.")
+    exit()
+
+# Store the counts of codons upstream of the selected stop codon
+codon_counts = {}
+
+# Go through each gene sequence
+for seq in seqs:
+    longest_orf = ""
+
+    # Check every possible ATG start codon
+    for start in range(len(seq) - 2):
+        if seq[start:start + 3] == "ATG":
+
+            # From this ATG, check codons in steps of 3
+            for pos in range(start + 3, len(seq) - 2, 3):
+                codon = seq[pos:pos + 3]
+
+                # Only consider the stop codon selected by the user
+                if codon == target:
+                    orf = seq[start:pos + 3]
+
+                    # Keep the ORF that gives the longest sequence
+                    if len(orf) > len(longest_orf):
+                        longest_orf = orf
+
+    # Count codons upstream of the selected stop codon
+    # The stop codon itself is not counted
+    if longest_orf != "":
+        for i in range(0, len(longest_orf) - 3, 3):
+            codon = longest_orf[i:i + 3]
+
             if codon in codon_counts:
                 codon_counts[codon] += 1
             else:
                 codon_counts[codon] = 1
 
-if target == 'TAG':
-    for gene in TAG:
-        for i in range(0,len(gene)-3,3):
-            codon = gene[i:i+3]
-            if codon not in codon_list:
-                codon_list.append(codon)
-            if codon in codon_counts:
-                codon_counts[codon] += 1
-            else:
-                codon_counts[codon] = 1
+# Print the codon counts
+print("Codon counts upstream of", target)
 
-if target == 'TGA':
-    for gene in TGA:
-        for i in range(0,len(gene)-3,3):
-            codon = gene[i:i+3]
-            if codon not in codon_list:
-                codon_list.append(codon)
-            if codon in codon_counts:
-                codon_counts[codon] += 1
-            else:
-                codon_counts[codon] = 1
+for codon in codon_counts:
+    print(codon, codon_counts[codon])
 
-labels = list(codon_counts.keys())
-sizes = list(codon_counts.values())
+# Generate and save a pie chart
+if len(codon_counts) > 0:
+    labels = list(codon_counts.keys())
+    sizes = list(codon_counts.values())
 
-plt.figure(figsize=(12, 12))
-plt.pie(sizes, labels=labels, autopct=lambda P:"%1.1f%%" if P>= 5 else "", startangle=90)
-plt.title("Codon distribution upstream of "+ target+"\n")
-plt.axis("equal")
-plt.savefig(target+"_pie_chart.png", dpi=300)
-plt.close()
+    plt.figure(figsize=(12, 12))
+    plt.pie(
+        sizes,
+        labels=labels,
+        autopct=lambda p: "%1.1f%%" % p if p >= 5 else "",
+        startangle=90
+    )
+
+    plt.title("Codon distribution upstream of " + target)
+    plt.axis("equal")
+    plt.savefig(target + "_pie_chart.png", dpi=300)
+    plt.close()
+
+    print("Pie chart saved as " + target + "_pie_chart.png")
+
+else:
+    print("No genes containing this in-frame stop codon were found.")
