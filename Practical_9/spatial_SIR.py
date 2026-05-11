@@ -4,18 +4,14 @@ import matplotlib.pyplot as plt
 beta = 0.3
 gamma = 0.05
 population = np.zeros((100, 100), dtype=int)
- ### TRY: considering vaccination ###
- #x_vacc = np.random.choice(range(100), 1000)
- #y_vacc = np.random.choice(range(100), 1000)
-
- #for j in range(1000):
- #    population[x_vacc[j], y_vacc[j]] = 2
- #
- #while True:
- #    outbreak = np.random.choice(range(100), 2)
- #    if population[outbreak[0], outbreak[1]] == 0:
- #        population[outbreak[0], outbreak[1]] = 1
- #        break
+outbreak = np.random.choice(range(100), 2)
+population[outbreak[0], outbreak[1]] = 1
+# plot time = 0 before the loop
+plt.figure(figsize=(6, 4), dpi=150)
+plt.imshow(population, cmap="viridis", interpolation="nearest")
+plt.title("time = 0")
+plt.colorbar()
+plt.show()
 
 for t in range(101): #100 time loops
     
@@ -39,10 +35,10 @@ for t in range(101): #100 time loops
         # recovery
         if population[x,y] == 1:
             new_population[x,y]=np.random.choice([1,2],1,p=[1-gamma,gamma])[0]
-        #update the population (to make the recovery process and infection process at the same time)
-        population = new_population
+    #update the population (to make the recovery process and infection process at the same time)
+    population = new_population
     # plot
-    if t in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
+    if t in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
         plt.figure(figsize=(6, 4), dpi=150)
         plt.imshow(population, cmap='viridis', interpolation='nearest')
         plt.title(f"time = {t}")
