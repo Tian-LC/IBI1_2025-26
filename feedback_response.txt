@@ -1,0 +1,7 @@
+I have reviewed the full feedback sheet and updated the deducted items where possible. 
+
+For Week 3, I moved the reflection file into the correct Week 3 folder and improved my commit messages so they more clearly describe the changes made.
+
+For Week 4, I added the missing comment in the variables task to state which calculated value was larger after comparing the two variables. I also improved the clearance calculation task by adding input validation, so invalid input values now produce an error message instead of still giving a normal output. 
+
+For Week 5, I updated the gene expression task so the dictionary is printed after the MYC data is added. I also improved the bar chart labelling by replacing underscores with clearer axis labels and spacing, making the plots easier to read.
